@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แปลงข้อความ</title>
+  <style>
+    body { font-family: 'Prompt', sans-serif; background: #f6f6f6; padding: 2rem; }
+    .container { background: #fff; max-width: 760px; margin: auto; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    textarea, select, button { width: 100%; padding: 1rem; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 1rem; }
+    button.convert { background: #4CAF50; color: white; }
+    button.copy { background: #2196F3; color: white; }
+    button.clear { background: #f44336; color: white; }
+    pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📦 แปลงข้อความ</h2>
+
+    <label for="productLine">เลือกสินค้า:</label>
+    <select id="productLine">
+      <option value="เจลสมุนไพรแก้ปวด Dr.YuTitan 1 แถม 2 / 50ml. / 1 / 0">เจลสมุนไพรแก้ปวด Dr.YuTitan 1 แถม 2</option>
+      <option value="เจลสมุนไพรแก้ปวด Dr.YuTitan 2 แถม 4 / 50ml. / 1 / 0">เจลสมุนไพรแก้ปวด Dr.YuTitan 2 แถม 4</option>
+      <option value="เจลสมุนไพรแก้ปวด Dr.YuTitan 3 แถม 6 / 50ml. / 1 / 0">เจลสมุนไพรแก้ปวด Dr.YuTitan 3 แถม 6</option>
+      <option value="Kreain Nature เจลนวดแก้ปวด 1 แถม 1 / 100ml. / 1 / 0">Kreain Nature เจลนวดแก้ปวด 1 แถม 1</option>
+      <option value="Kreain Nature เจลนวดแก้ปวด 2 แถม 2 / 100ml. / 1 / 0">Kreain Nature เจลนวดแก้ปวด 2 แถม 2</option>
+      <option value="Kreain Nature เจลนวดแก้ปวด 3 แถม 3 / 100ml. / 1 / 0">Kreain Nature เจลนวดแก้ปวด 3 แถม 3</option>
+    </select>
+
+    <label for="pageLine">เลือกเพจ/คอนเซ็ปต์สินค้า:</label>
+    <select id="pageLine">
+      <option value="เจลสมุนไพรแก้ปวดเรื้อรัง Dr.YuTitan">เจลสมุนไพรแก้ปวดเรื้อรัง Dr.YuTitan</option>
+      <option value="Kreain Nature ผู้ช่วยแก้ปวดข้อ">Kreain Nature ผู้ช่วยแก้ปวดข้อ</option>
+    </select>
+
+    <textarea id="inputText" placeholder="วางข้อความที่นี่..."></textarea>
+    <button class="convert" onclick="convertText()">แปลงข้อความ</button>
+    <button class="clear" onclick="clearForm()">ล้างข้อมูล</button>
+    <pre id="output"></pre>
+    <button class="copy" onclick="copyResult()">📋 คัดลอกผลลัพธ์</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
