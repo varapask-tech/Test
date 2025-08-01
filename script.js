@@ -5,14 +5,28 @@ function convertText() {
   const page = document.getElementById("pageLine").value;
   const map = { id: '', name: '', cod: '', address: '', phone: '', fb: '', admin: '', zip: '', province: '', tambon: '', amphur: '' };
 
-  for (let i = 0; i < lines.length; i++) {
+  let i = 0;
+  const first = lines[0];
+  if (/^K\d+/.test(first)) {
+    map.id = first.trim();
+    map.name = lines[1]?.trim() || '';
+    i = 2;
+  } else {
+    map.name = first;
+    i = 1;
+  }
+
+  for (; i < lines.length; i++) {
     const line = lines[i];
-    if (!map.id && /^K\d+/.test(line)) { map.id = line.trim(); map.name = lines[++i]?.trim(); }
-    else if (/COD[:：]/i.test(line)) { const m = line.match(/(\d+)/); if (m) map.cod = m[1]; }
-    else if (/\d{9,}/.test(line)) { map.phone = line.match(/\d{9,}/)?.[0]; }
-    else if (/Fb[:：]/i.test(line)) { map.fb = line.split(/[:：]/)[1]?.trim(); }
-    else if (/Admin[:：]/i.test(line)) { map.admin = line.split(/[:：]/)[1]?.trim(); }
-    else if (/\d{5}$/.test(line)) {
+    if (/COD[:：]/i.test(line)) {
+      const m = line.match(/(\d+)/); if (m) map.cod = m[1];
+    } else if (/\d{9,}/.test(line)) {
+      map.phone = line.match(/\d{9,}/)?.[0];
+    } else if (/Fb[:：]/i.test(line)) {
+      map.fb = line.split(/[:：]/)[1]?.trim();
+    } else if (/Admin[:：]/i.test(line)) {
+      map.admin = line.split(/[:：]/)[1]?.trim();
+    } else if (/\d{5}$/.test(line)) {
       map.zip = line.match(/\d{5}$/)[0];
       const p = line.match(/จ\.?\s*(\S+)/); if (p) map.province = p[1];
       const clean = line.replace(/จ\..*/g, '').replace(/\d{5}/, '').replace(/📌.*$/, '').replace(/Pg:.*$/, '').trim();
@@ -35,7 +49,7 @@ function convertText() {
 
   const today = new Date().toISOString().split("T")[0];
   const output = [
-    `=${map.id}.${map.name}`,
+    `=${map.id ? map.id + '.' : ''}${map.name}`,
     `=${product}`,
     `=COD/${map.cod}`,
     `=${fullAddress}`,
